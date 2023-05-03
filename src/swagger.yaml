@@ -1,0 +1,792 @@
+openapi: 3.0.0
+info:
+  description: API description
+  version: 1.0.0
+  title: My API
+tags:
+  - name: basic-error-controller
+    description: Basic Error Controller
+  - name: stable-diffusion-controller
+    description: Stable Diffusion Controller
+  - name: user-contorller
+    description: User Contorller
+paths:
+  /error:
+    get:
+      tags:
+        - basic-error-controller
+      summary: errorHtml
+      operationId: errorHtmlUsingGET
+      responses:
+        "200":
+          description: OK
+          content:
+            text/html:
+              schema:
+                $ref: "#/components/schemas/ModelAndView"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+    head:
+      tags:
+        - basic-error-controller
+      summary: errorHtml
+      operationId: errorHtmlUsingHEAD
+      responses:
+        "200":
+          description: OK
+          content:
+            text/html:
+              schema:
+                $ref: "#/components/schemas/ModelAndView"
+        "204":
+          description: No Content
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+    post:
+      tags:
+        - basic-error-controller
+      summary: errorHtml
+      operationId: errorHtmlUsingPOST
+      responses:
+        "200":
+          description: OK
+          content:
+            text/html:
+              schema:
+                $ref: "#/components/schemas/ModelAndView"
+        "201":
+          description: Created
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+    put:
+      tags:
+        - basic-error-controller
+      summary: errorHtml
+      operationId: errorHtmlUsingPUT
+      responses:
+        "200":
+          description: OK
+          content:
+            text/html:
+              schema:
+                $ref: "#/components/schemas/ModelAndView"
+        "201":
+          description: Created
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+    delete:
+      tags:
+        - basic-error-controller
+      summary: errorHtml
+      operationId: errorHtmlUsingDELETE
+      responses:
+        "200":
+          description: OK
+          content:
+            text/html:
+              schema:
+                $ref: "#/components/schemas/ModelAndView"
+        "204":
+          description: No Content
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+    options:
+      tags:
+        - basic-error-controller
+      summary: errorHtml
+      operationId: errorHtmlUsingOPTIONS
+      responses:
+        "200":
+          description: OK
+          content:
+            text/html:
+              schema:
+                $ref: "#/components/schemas/ModelAndView"
+        "204":
+          description: No Content
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+    patch:
+      tags:
+        - basic-error-controller
+      summary: errorHtml
+      operationId: errorHtmlUsingPATCH
+      responses:
+        "200":
+          description: OK
+          content:
+            text/html:
+              schema:
+                $ref: "#/components/schemas/ModelAndView"
+        "204":
+          description: No Content
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+  /imageai/dhbh1387/healthcheck:
+    get:
+      tags:
+        - stable-diffusion-controller
+      summary: healthCheck
+      operationId: healthCheckUsingGET
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                type: string
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+  "/imageai/fetch/{id}":
+    get:
+      tags:
+        - stable-diffusion-controller
+      summary: Fetch queued result
+      operationId: fetchImageUsingGET
+      parameters:
+        - name: Authorization
+          in: header
+          description: Authorization
+          required: true
+          schema:
+            type: string
+        - name: id
+          in: path
+          description: id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/ImgResponse"
+        "201":
+          description: Created
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "402":
+          description: Forbidden
+        "403":
+          description: Not Found
+        "404":
+          description: Not Found
+  /imageai/img2img:
+    post:
+      tags:
+        - stable-diffusion-controller
+      summary: Generate images from image using Stable Diffusion model
+      operationId: img2ImgUsingPOST
+      parameters:
+        - name: Authorization
+          in: header
+          description: Authorization
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Img2ImgParams"
+        description: params
+        required: true
+      responses:
+        "200":
+          description: Success
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/ImgResponse"
+        "201":
+          description: Created
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "402":
+          description: Forbidden
+        "403":
+          description: Not Found
+        "404":
+          description: Not Found
+  /imageai/inpainting:
+    post:
+      tags:
+        - stable-diffusion-controller
+      summary: Generate images from image using Stable Diffusion model
+      operationId: inPaintingUsingPOST
+      parameters:
+        - name: Authorization
+          in: header
+          description: Authorization
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InpaintingParams"
+        description: params
+        required: true
+      responses:
+        "200":
+          description: Success
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/ImgResponse"
+        "201":
+          description: Created
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "402":
+          description: Forbidden
+        "403":
+          description: Not Found
+        "404":
+          description: Not Found
+  /imageai/instruct-pix2pix:
+    post:
+      tags:
+        - stable-diffusion-controller
+      summary: Generate pix 2 pix image using Stable Diffusion model
+      operationId: instructPix2PixUsingPOST
+      parameters:
+        - name: Authorization
+          in: header
+          description: Authorization
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InstructPix2PixParams"
+        description: params
+        required: true
+      responses:
+        "200":
+          description: Success
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/ImgResponse"
+        "201":
+          description: Created
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "402":
+          description: Forbidden
+        "403":
+          description: Not Found
+        "404":
+          description: Not Found
+  /imageai/text2img:
+    post:
+      tags:
+        - stable-diffusion-controller
+      summary: Generate images from text prompts using Stable Diffusion model
+      operationId: text2ImgUsingPOST
+      parameters:
+        - name: Authorization
+          in: header
+          description: Authorization
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Text2ImgParams"
+        description: params
+        required: true
+      responses:
+        "200":
+          description: Success
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/ImgResponse"
+        "201":
+          description: Created
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "402":
+          description: Forbidden
+        "403":
+          description: Not Found
+        "404":
+          description: Not Found
+  /saveuser:
+    post:
+      tags:
+        - user-contorller
+      summary: Save user details and Create api key
+      operationId: saveUserUsingPOST
+      parameters:
+        - name: code
+          in: query
+          description: code
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/CognitoUserDetails"
+        "201":
+          description: Created
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "402":
+          description: Forbidden
+        "403":
+          description: Not Found
+        "404":
+          description: Not Found
+servers:
+  - url: //inferallai-env.eba-qxgxsbg3.us-east-2.elasticbeanstalk.com
+components:
+  schemas:
+    CognitoUserDetails:
+      type: object
+      properties:
+        email:
+          type: string
+        email_verified:
+          type: boolean
+        username:
+          type: string
+      title: CognitoUserDetails
+    Img2ImgParams:
+      type: object
+      properties:
+        guidance_scale:
+          type: number
+          format: float
+          description: Guidance scale.
+          minimum: 0
+          exclusiveMinimum: false
+        image_height:
+          type: integer
+          format: int32
+          description: Image height.
+          maximum: 696
+          exclusiveMaximum: false
+        image_url:
+          type: string
+          description: Image Url
+        image_width:
+          type: integer
+          format: int32
+          description: Image width.
+          maximum: 696
+          exclusiveMaximum: false
+        model:
+          type: string
+          description: Model name
+        negative_prompt:
+          type: string
+          example: a terrible storm
+          description: Negative text prompt for the model.
+        num_images:
+          type: integer
+          format: int32
+          description: Number of images to generate.
+          minimum: 1
+          maximum: 4
+          exclusiveMinimum: false
+          exclusiveMaximum: false
+        prompt:
+          type: string
+          example: a beautiful sunset
+          description: Text prompt for the model.
+        scheduler:
+          type: string
+          description: Scheduler to use for the model.
+          pattern: DDIMScheduler|EulerAncestralDiscreteScheduler|PNDMScheduler
+        seed:
+          type: integer
+          format: int32
+          description: Seed for the model.
+          minimum: 0
+          exclusiveMinimum: false
+        steps:
+          type: integer
+          format: int32
+          description: Number of steps to run the model.
+          minimum: 1
+          maximum: 50
+          exclusiveMinimum: false
+          exclusiveMaximum: false
+        strength:
+          type: number
+          format: float
+          description: Strength
+          minimum: 0
+          maximum: 1
+          exclusiveMinimum: false
+          exclusiveMaximum: false
+        type:
+          type: string
+      title: Img2ImgParams
+    ImgResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          description: Error
+          items:
+            type: string
+        id:
+          type: string
+          description: Id
+        metadata:
+          type: object
+          description: Metadata
+        output:
+          type: array
+          description: List of images in base64 format
+          items:
+            type: string
+        status:
+          type: string
+          description: Request status
+      title: ImgResponse
+    InpaintingParams:
+      type: object
+      properties:
+        guidance_scale:
+          type: number
+          format: float
+          description: Guidance scale.
+          minimum: 0
+          exclusiveMinimum: false
+        image_height:
+          type: integer
+          format: int32
+          description: Image height.
+          maximum: 696
+          exclusiveMaximum: false
+        image_url:
+          type: string
+          description: Image Url
+        image_width:
+          type: integer
+          format: int32
+          description: Image width.
+          maximum: 696
+          exclusiveMaximum: false
+        mask_url:
+          type: string
+          description: Mask Image Url
+        model:
+          type: string
+          description: Model name
+          pattern: runwayml/stable-diffusion-inpainting|stabilityai/stable-diffusion-2-inpainting
+        negative_prompt:
+          type: string
+          example: a terrible storm
+          description: Negative text prompt for the model.
+        num_images:
+          type: integer
+          format: int32
+          description: Number of images to generate.
+          minimum: 1
+          maximum: 4
+          exclusiveMinimum: false
+          exclusiveMaximum: false
+        prompt:
+          type: string
+          example: a beautiful sunset
+          description: Text prompt for the model.
+        scheduler:
+          type: string
+          description: Scheduler to use for the model.
+          pattern: DDIMScheduler|EulerAncestralDiscreteScheduler|PNDMScheduler
+        seed:
+          type: integer
+          format: int32
+          description: Seed for the model.
+          minimum: 0
+          exclusiveMinimum: false
+        steps:
+          type: integer
+          format: int32
+          description: Number of steps to run the model.
+          minimum: 1
+          maximum: 50
+          exclusiveMinimum: false
+          exclusiveMaximum: false
+        type:
+          type: string
+      title: InpaintingParams
+    InstructPix2PixParams:
+      type: object
+      properties:
+        guidance_scale:
+          type: number
+          format: float
+          description: Guidance scale.
+          minimum: 0
+          exclusiveMinimum: false
+        image_guidance_scale:
+          type: number
+          format: float
+          description: Image guidance scale
+          minimum: 0
+          exclusiveMinimum: false
+        image_height:
+          type: integer
+          format: int32
+          description: Image height.
+          maximum: 696
+          exclusiveMaximum: false
+        image_url:
+          type: string
+          description: Image Url
+        image_width:
+          type: integer
+          format: int32
+          description: Image width.
+          maximum: 696
+          exclusiveMaximum: false
+        model:
+          type: string
+          description: Model name
+        negative_prompt:
+          type: string
+          example: a terrible storm
+          description: Negative text prompt for the model.
+        num_images:
+          type: integer
+          format: int32
+          description: Number of images to generate.
+          minimum: 1
+          maximum: 4
+          exclusiveMinimum: false
+          exclusiveMaximum: false
+        prompt:
+          type: string
+          example: a beautiful sunset
+          description: Text prompt for the model.
+        scheduler:
+          type: string
+          description: Scheduler to use for the model.
+          pattern: DDIMScheduler|EulerAncestralDiscreteScheduler|PNDMScheduler
+        seed:
+          type: integer
+          format: int32
+          description: Seed for the model.
+          minimum: 0
+          exclusiveMinimum: false
+        steps:
+          type: integer
+          format: int32
+          description: Number of steps to run the model.
+          minimum: 1
+          maximum: 50
+          exclusiveMinimum: false
+          exclusiveMaximum: false
+        type:
+          type: string
+      title: InstructPix2PixParams
+    ModelAndView:
+      type: object
+      properties:
+        empty:
+          type: boolean
+        model:
+          type: object
+        modelMap:
+          type: object
+          additionalProperties:
+            type: object
+        reference:
+          type: boolean
+        status:
+          type: string
+          enum:
+            - ACCEPTED
+            - ALREADY_REPORTED
+            - BAD_GATEWAY
+            - BAD_REQUEST
+            - BANDWIDTH_LIMIT_EXCEEDED
+            - CHECKPOINT
+            - CONFLICT
+            - CONTINUE
+            - CREATED
+            - DESTINATION_LOCKED
+            - EXPECTATION_FAILED
+            - FAILED_DEPENDENCY
+            - FORBIDDEN
+            - FOUND
+            - GATEWAY_TIMEOUT
+            - GONE
+            - HTTP_VERSION_NOT_SUPPORTED
+            - IM_USED
+            - INSUFFICIENT_SPACE_ON_RESOURCE
+            - INSUFFICIENT_STORAGE
+            - INTERNAL_SERVER_ERROR
+            - I_AM_A_TEAPOT
+            - LENGTH_REQUIRED
+            - LOCKED
+            - LOOP_DETECTED
+            - METHOD_FAILURE
+            - METHOD_NOT_ALLOWED
+            - MOVED_PERMANENTLY
+            - MOVED_TEMPORARILY
+            - MULTIPLE_CHOICES
+            - MULTI_STATUS
+            - NETWORK_AUTHENTICATION_REQUIRED
+            - NON_AUTHORITATIVE_INFORMATION
+            - NOT_ACCEPTABLE
+            - NOT_EXTENDED
+            - NOT_FOUND
+            - NOT_IMPLEMENTED
+            - NOT_MODIFIED
+            - NO_CONTENT
+            - OK
+            - PARTIAL_CONTENT
+            - PAYLOAD_TOO_LARGE
+            - PAYMENT_REQUIRED
+            - PERMANENT_REDIRECT
+            - PRECONDITION_FAILED
+            - PRECONDITION_REQUIRED
+            - PROCESSING
+            - PROXY_AUTHENTICATION_REQUIRED
+            - REQUESTED_RANGE_NOT_SATISFIABLE
+            - REQUEST_ENTITY_TOO_LARGE
+            - REQUEST_HEADER_FIELDS_TOO_LARGE
+            - REQUEST_TIMEOUT
+            - REQUEST_URI_TOO_LONG
+            - RESET_CONTENT
+            - SEE_OTHER
+            - SERVICE_UNAVAILABLE
+            - SWITCHING_PROTOCOLS
+            - TEMPORARY_REDIRECT
+            - TOO_EARLY
+            - TOO_MANY_REQUESTS
+            - UNAUTHORIZED
+            - UNAVAILABLE_FOR_LEGAL_REASONS
+            - UNPROCESSABLE_ENTITY
+            - UNSUPPORTED_MEDIA_TYPE
+            - UPGRADE_REQUIRED
+            - URI_TOO_LONG
+            - USE_PROXY
+            - VARIANT_ALSO_NEGOTIATES
+        view:
+          $ref: "#/components/schemas/View"
+        viewName:
+          type: string
+      title: ModelAndView
+    Text2ImgParams:
+      type: object
+      properties:
+        guidance_scale:
+          type: number
+          format: float
+          description: Guidance scale.
+          minimum: 0
+          exclusiveMinimum: false
+        image_height:
+          type: integer
+          format: int32
+          description: Image height.
+          maximum: 696
+          exclusiveMaximum: false
+        image_width:
+          type: integer
+          format: int32
+          description: Image width.
+          maximum: 696
+          exclusiveMaximum: false
+        model:
+          type: string
+          description: Model name
+        negative_prompt:
+          type: string
+          example: a terrible storm
+          description: Negative text prompt for the model.
+        num_images:
+          type: integer
+          format: int32
+          description: Number of images to generate.
+          minimum: 1
+          maximum: 4
+          exclusiveMinimum: false
+          exclusiveMaximum: false
+        prompt:
+          type: string
+          example: a beautiful sunset
+          description: Text prompt for the model.
+        scheduler:
+          type: string
+          description: Scheduler to use for the model.
+          pattern: DDIMScheduler|EulerAncestralDiscreteScheduler|PNDMScheduler
+        seed:
+          type: integer
+          format: int32
+          description: Seed for the model.
+          minimum: 0
+          exclusiveMinimum: false
+        steps:
+          type: integer
+          format: int32
+          description: Number of steps to run the model.
+          minimum: 1
+          maximum: 50
+          exclusiveMinimum: false
+          exclusiveMaximum: false
+        type:
+          type: string
+      title: Text2ImgParams
+    View:
+      type: object
+      properties:
+        contentType:
+          type: string
+      title: View

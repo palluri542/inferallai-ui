@@ -1,12 +1,16 @@
+import React from 'react';
 import { API } from '@stoplight/elements';
-
 import '@stoplight/elements/styles.min.css';
-import './App.css';
+import docs from './swagger.json';
+
+const apiDescriptionDocument = docs;
 
 function App() {
   return (
     <div className="App">
-      <API apiDescriptionUrl="https://raw.githubusercontent.com/stoplightio/Public-APIs/master/reference/zoom/openapi.yaml" />
+      <API
+        apiDescriptionDocument={apiDescriptionDocument}
+      />
     </div>
   );
 }
