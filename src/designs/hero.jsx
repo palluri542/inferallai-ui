@@ -17,10 +17,7 @@ const styles = {
 
 function Hero() {
     return (
-        <Section>
-            <div style={styles.child}>
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
-            </div>
+        <Section title="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s">
             <br />
             <div style={styles.child}>
                 <img src={require("./hero.jpeg").default} alt="not found" />

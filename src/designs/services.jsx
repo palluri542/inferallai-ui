@@ -24,12 +24,17 @@ const styles = {
     desc: {
         fontWeight: '300',
         fontSize: '12px'
+    },
+    title: {
+        fontSize: '20px',
+        fontWeight: '600',
+        textAlign: 'center'
     }
 }
 
 function Services() {
     return (
-        <Section>
+        <Section title="List will be on the left and on clickig each will show more details or samples">
             {
                 servicesList.map(service => (
                     <div style={styles.card}>

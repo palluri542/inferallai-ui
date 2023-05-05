@@ -23,7 +23,7 @@ function Header() {
         <div style={styles.title}>infer.all.ai</div>
         <div style={styles.nav}>
             <ul>
-                <li>Api documentation</li>
+                <li style={{cursor: 'pointer'}} onClick={() => alert('opens api documenation')}>Api documentation</li>
             </ul>
         </div>
     </div>

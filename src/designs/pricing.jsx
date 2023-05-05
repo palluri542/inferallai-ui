@@ -4,7 +4,7 @@ import Switch from './switch';
 
 function Pricing() {
   return (
-    <Section>
+    <Section title="Finalize this pricing">
         <div style={{textAlign: 'center'}}>
             <Switch />
         </div>
